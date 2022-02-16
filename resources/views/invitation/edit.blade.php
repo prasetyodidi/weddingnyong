@@ -84,12 +84,12 @@
                         <div class="flex justify-between lg:w-5/12">
                             <div>
                                 <p class="text-center">dimulai</p>
-                                <input type="time" name="wedding_time_start" value="{{ old('wedding_time_start', $invitation->wedding_time_start) }}">
+                                <input type="time" name="wedding_time_start" value="{{ date('H:i', strtotime(old('wedding_time_start', $invitation->wedding_time_start))) }}">
                                 <x-validation-message name="wedding_time_start"/>
                             </div>
                             <div>
                                 <p class="text-center">sampai</p>
-                                <input type="time" name="wedding_time_end" value="{{ old('wedding_time_end', $invitation->wedding_time_end) }}">
+                                <input type="time" name="wedding_time_end" value="{{ date('H:i', strtotime(old('wedding_time_end', $invitation->wedding_time_end))) }}">
                                 <x-validation-message name="wedding_time_end"/>
                             </div>
                         </div>
@@ -106,12 +106,12 @@
                         <div class="flex justify-between lg:w-5/12">
                             <div>
                                 <p class="text-center">dimulai</p>
-                                <input type="time" name="reception_time_start" value="{{ old('reception_time_start', $invitation->reception_time_start) }}">
+                                <input type="time" name="reception_time_start" value="{{ date('H:i', strtotime(old('reception_time_start', $invitation->reception_time_start))) }}">
                                 <x-validation-message name="reception_time_start"/>
                             </div>
                             <div>
                                 <p class="text-center">sampai</p>
-                                <input type="time" name="reception_time_end" value="{{ old('reception_time_end', $invitation->reception_time_end) }}">
+                                <input type="time" name="reception_time_end" value="{{ date('H:i', strtotime(old('reception_time_end', $invitation->reception_time_end))) }}">
                                 <x-validation-message name="reception_time_end"/>
                             </div>
                         </div>
@@ -145,16 +145,22 @@
                 </div>
                 
             </div class="flex flex-col mb-3 md:flex-row md:justify-around">
-            <div class="flex flex-col items-center justify-evenly md:flex-row">
+            <div class="flex flex-col items-center justify-evenly md:flex-row mb-7">
                 <div class="mb-3">
-                    <p class="md:text-lg lg:text-2xl">Embed maps</p>
+                    <div class="flex items-center">
+                        <p class="md:text-lg lg:text-2xl">Embed maps</p>
+                        <div class="relative group hover:cursor-pointer">
+                            <i class="fas fa-question"></i>
+                            <div class="hidden bg-green-300 group-hover:block p-7 absolute -top-11 left-3"></div>
+                        </div>
+                    </div>
                     <textarea name="embed_maps" id="embed-maps" cols="30" rows="3">{{ old('embed_maps', $invitation->embed_maps) }}</textarea>
                     <x-validation-message name="embed_maps"/>
                 </div>
                 <div class="flex flex-col items-center">
                     <h1>Desain</h1>
                     <input type="hidden" name="design_id" id="designId" value="{{ old('design_id', $invitation->design_id) }}">
-                    <p>{{ $invitation->design->name }}</p>
+                    <p id="designName">{{ $invitation->design->name }}</p>
                     <img id="thumbDesign" src="/{{ $invitation->design->thumb }}" alt="{{ $invitation->design->name }}">
                     
                     <button type="button" onclick="toggleModal('chooseDesign', true)" class="h-7 w-32 rounded-md bg-yellow-300 text-white">Pilih Design</button>
@@ -163,7 +169,6 @@
 
             {{-- Modal  --}}
             <div id="chooseDesign" class="fixed hidden left-0 right-0 top-0 bottom-0 duration-300 ease-in">
-            {{-- <div id="chooseDesign" class="fixed hidden left-0 right-0 top-0 bottom-0"> --}}
                 <div class="flex relative justify-center w-screen h-screen bg-gray-500 bg-opacity-75 px-5">
                     <div class="flex flex-col h-3/4 w-96 overflow-x-hidden absolute rounded-lg bg-white shadow-md px-5 py-7 mt-7 mx-3 md:w-2/3">
                         <div class="flex justify-between">
@@ -174,23 +179,21 @@
                         </div>
                         <hr>
                         <div id="my-slider" class=" h-5/6 w-auto grid grid-rows-1 grid-flow-col duration-300 ease-in">
-                        {{-- <div class="overflow-y-auto bg-green-200 h-5/6 grid grid-rows-1 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-7"> --}}
                             @foreach ($designs as $item)
-                                <div class="my-slides flex flex-col w-96 border-2 rounded-md hover:cursor-pointer overflow-hidden">
+                                <div class="my-slides flex flex-col w-96 border-2 rounded-md hover:cursor-pointer overflow-hidden px-3">
                                     <div class="relative group overflow-hidden">
                                         <img class="w-full group-hover:rotate-12 group-hover:scale-110 ease-in duration-200" src="/{{ $item->thumb }}" alt="thumb design">
                                         <div class="absolute hidden group-hover:block left-0 top-0 right-0 bottom-0 bg-slate-300 opacity-60"></div>
                                     </div>
-                                    <div class="h-14 leading-14 flex justify-around items-center">
-                                        <p class="border-2 leading-14">{{ $item->name }}</p>
-                                        <button  onclick="chooseDesign('{{ $item->id }}', '/{{ $item->thumb }}')" type="button" class="block rounded-md bg-primary text-white w-16 h-7 md:w-24 md:h-8 md:text-lg lg:text-2xl">Pilih</button>
+                                    <div class="flex flex-col justify-around items-center py-2 mx-auto md:flex-row">
+                                        <p class="border-2 w-3/5 mb-3">{{ $item->name }}</p>
+                                        <button  onclick="chooseDesign('{{ $item->id }}', '/{{ $item->thumb }}', '{{ $item->name }}')" type="button" class="block rounded-md bg-primary text-white w-2/5 px-3 md:w-24 md:h-8 md:text-lg lg:text-2xl">Pilih</button>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                         <div class="flex flex-row justify-between h-16 items-center">
                             <i class="fas fa-angle-double-left" onclick="plusDivs(-1)"></i>
-                            {{-- <button>Pilih</button> --}}
                             <i class="fas fa-angle-double-right" onclick="plusDivs(1)"></i>
                         </div>
                     </div>
@@ -205,12 +208,14 @@
     <x-footer></x-footer>
     <script src="/js/home/script.js"></script>
     <script>
-        function chooseDesign(paramDesignId, paramDesignThumb) {
+        function chooseDesign(paramDesignId, paramDesignThumb, paramDesignName) {
             let designId = document.getElementById('designId')
             let thumbDesign = document.getElementById('thumbDesign')
+            let designName = document.getElementById('designName')
             
             designId.value = paramDesignId
             thumbDesign.src = paramDesignThumb
+            designName.innerHTML = paramDesignName
 
             toggleModal('chooseDesign', false)
         }
