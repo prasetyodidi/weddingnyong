@@ -40,6 +40,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard/guest-book', [DashboardController::class, 'guestBooks']);
     Route::get('/dashboard/attendee-list', [DashboardController::class, 'attendeeList']);
     Route::get('/dashboard/user', [DashboardController::class, 'users']);
+    Route::get('/dashboard/design', [DashboardController::class, 'design']);
 });
 
 Route::get('/demo/winter', function () {

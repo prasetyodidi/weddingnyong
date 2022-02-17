@@ -6,6 +6,7 @@ use App\Models\Attendee_list;
 use App\Models\Guest_book;
 use App\Models\Invitation;
 use App\Models\User;
+use App\Models\Design;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -94,5 +95,11 @@ class DashboardController extends Controller
         // dd($data);
 
         return view('dashboard/user', $data);
+    }
+
+    public function design()
+    {
+        $designs = Design::latest()->paginate(3);
+        return view('dashboard/design', compact('designs'));
     }
 }

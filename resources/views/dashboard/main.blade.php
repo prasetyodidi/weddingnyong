@@ -46,6 +46,10 @@
                             <p class="hidden lg:block md:left-6">User</p>
                             <i class="{{ Request::is('dashboard/user') ? 'text-primary' : 'text-gray-400' }} fas fa-user hover:text-primary lg:leading-6"></i>
                         </a>
+                        <a href="/dashboard/design" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                            <p class="hidden lg:block md:left-6">Design</p>
+                            <i class="fas fa-palette {{ Request::is('dashboard/design') ? 'text-primary' : 'text-gray-400' }} hover:text-primary lg:leading-6"></i>
+                        </a>
                     @endcan
                 </div>
                 <form action="/logout" method="POST" class="flex justify-center h-1/12 w-5/6 lg:block">
