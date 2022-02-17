@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{mix ('css/app.css')}}">
+    <script type="text/javascript"> window.$crisp=[];window.CRISP_WEBSITE_ID="a3981fba-4383-42c2-b26c-b8b37008aec7";(function(){ d=document;s=d.createElement("script"); s.src="https://client.crisp.chat/l.js"; s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})(); </script>
 
     <title>Landing page</title>
 </head>
 <body>
-    <div class="container relative min-h-screen mx-auto overflow-hidden pb-16">
-        <i class="fab fa-facebook-messenger fixed bottom-0 right-0 hover:cursor-pointer text-5xl text-primary mr-5 mb-5 md:text-6xl lg:text-7xl z-30"></i>
-       
+    <div class="container relative min-h-screen mx-auto overflow-hidden pb-16">       
         <x-header></x-header>
         
         <div class="w-full min-h-screen lg:min-h-screen">
