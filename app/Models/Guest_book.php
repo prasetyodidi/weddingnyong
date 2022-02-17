@@ -21,9 +21,9 @@ class Guest_book extends Model
         $user = auth()->user();
         $rsInvitations = [];
         if ($user->role_id == 0) {
-            $rsInvitations = Invitation::where('user_id', $user->id)->with('guestBooks')->get();
+            $rsInvitations = Invitation::where('user_id', $user->id)->with('guestBooks')->latest()->paginate(4);
         } else {
-            $rsInvitations = Invitation::with('attendeeLists')->get();
+            $rsInvitations = Invitation::with('guestBooks')->latest()->paginate(4);
         }
 
         return $rsInvitations;
