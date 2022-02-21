@@ -120,7 +120,7 @@
                     <div class="flex flex-col border-2 rounded-md hover:cursor-pointer overflow-hidden">
                         <div class="relative group overflow-hidden">
                             <img class="w-full group-hover:rotate-12 group-hover:scale-110 ease-in duration-200" src="{{ $item->thumb }}" alt="thumb design">
-                            <div class="absolute hidden group-hover:block left-0 top-0 right-0 bottom-0 bg-slate-300 opacity-60"></div>
+                            <div class="absolute hidden group-hover:block duration-700 left-0 top-0 right-0 bottom-0 bg-slate-300 opacity-60"></div>
                         </div>
                         <div class="h-14 leading-14">
                             <p class="border-2 leading-14">{{ $item->name }}</p>
@@ -128,7 +128,7 @@
                     </div>
                 @endforeach
             </div>
-            <a href="{{ route('design.all') }}" class="block no-underline h-9 w-48 bg-primary rounded-2xl mt-7 mx-auto text-white text-center leading-9">Lihat Desain Lainnya</a>
+            <a href="{{ route('design.index') }}" class="block no-underline h-9 w-48 bg-primary rounded-2xl mt-7 mx-auto text-white text-center leading-9">Lihat Desain Lainnya</a>
         </div>
 
         {{-- Testimoni --}}

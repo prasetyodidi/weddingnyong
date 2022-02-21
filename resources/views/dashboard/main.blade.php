@@ -13,10 +13,17 @@
         <div class="w-full h-14 bg-white flex justify-around items-center">
             <h1 class="text-xl">Weddingnyong</h1>
             {{-- nav link --}}
-            <div class="flex w-1/2 justify-end items-center">
+            <div class="flex relative group w-1/2 justify-end items-center hover:cursor-pointer ">
                 <i class="fas fa-bell text-gray-primary text-xl"></i>
                 <img class="inline object-cover w-10 h-10 rounded-full" src="/img/web/—Pngtree—profile glyph black icon_4008321.png" alt="Profile image"/>
                 <p>Hello, {{ auth()->user()->name }}</p>
+                <div class="absolute hidden text-center top-0 px-7 py-2 bg-white rounded-md border-2 shadow-md w-0 group-hover:w-auto group-hover:block group-hover:ease-in duration-700 ">
+                    <img class="rounded-full w-11 h-11 mx-auto border-2" src="{{ auth()->user()->profile_image }}" alt="profile">
+                    <h2>{{ auth()->user()->name }}</h2>
+                    <p class="text-sm text-gray-600">{{ auth()->user()->email }}</p>
+                    <p class="text-sm">{{ auth()->user()->address ? auth()->user()->address : 'Anda belum menambahkan alamat' }}</p>
+                    <a href="{{ route('dashboard.profile') }}" class="block w-auto rounded-lg hover:shadow-md border-2 px-2 mt-7">kelola Akun Anda</a>
+                </div>
             </div>
         </div>
 
@@ -51,6 +58,10 @@
                             <i class="fas fa-palette {{ Request::is('dashboard/design') ? 'text-primary' : 'text-gray-400' }} hover:text-primary lg:leading-6"></i>
                         </a>
                     @endcan
+                    <a href="/dashboard/profile" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                        <p class="hidden lg:block md:left-6">Profile</p>
+                        <i class="{{ Request::is('dashboard/profile') ? 'text-primary' : 'text-gray-400' }} fas fa-user-circle hover:text-primary lg:leading-6"></i>
+                    </a>
                 </div>
                 <form action="/logout" method="POST" class="flex justify-center h-1/12 w-5/6 lg:block">
                     @csrf
