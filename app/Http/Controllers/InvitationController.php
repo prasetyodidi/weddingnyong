@@ -64,9 +64,6 @@ class InvitationController extends Controller
     // must verify, auth
     public function store(HttpRequest $request)
     {
-        // $html = str_get_html($request->embed_maps);
-        // $request->embed_maps = $html->find('iframe')[0]->src;
-
         $rules = [
             'cover_image' => 'required|image|file|max:2048',
             'groom_image' => 'required|image|file|max:2048',
@@ -153,12 +150,10 @@ class InvitationController extends Controller
     // only invitee owner & admin
     public function update(HttpRequest $request, Invitation $invitation)
     {
-        // dd($request->file('cover_image'));
-
         $rules = [
-            // 'cover_image' => 'required|image|file|max:2048',
-            // 'groom_image' => 'required|image|file|max:2048',
-            // 'bride_image' => 'required|image|file|max:2048',
+            'cover_image' => 'image|file|max:2048',
+            'groom_image' => 'image|file|max:2048',
+            'bride_image' => 'image|file|max:2048',
             'groom_name' => 'required|max:255',
             'groom_fullname' => 'required|max:255',
             'groom_info' => 'required',
@@ -187,16 +182,12 @@ class InvitationController extends Controller
             $validateData['cover_image'] = $request->file('cover_image')->store('img/invitation', ['disk' => 'directly_to_public']);
         }
         if ($request->bride_image) {
-            $validateData['bride_image'] = $request->file('bride_image')->store('imginvitation', ['disk' => 'directly_to_public']);
+            $validateData['bride_image'] = $request->file('bride_image')->store('img/invitation', ['disk' => 'directly_to_public']);
         }
-        if ($request->bride_image) {
-            $validateData['groom_image'] = $request->file('groom_image')->store('img/inviation', ['disk' => 'directly_to_public']);
+        if ($request->groom_image) {
+            $validateData['groom_image'] = $request->file('groom_image')->store('img/invitation', ['disk' => 'directly_to_public']);
         }
         $invitation->update($validateData);
-        // jika ada ada file yg di upload
-        // maka upload file dan update data
-        // lainnya 
-        // biarkan isi file
 
         return 'upload updated data to database';
     }
