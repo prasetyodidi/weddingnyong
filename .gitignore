@@ -16,8 +16,3 @@ yarn-error.log
 
 /public/img/user/profile/*
 /public/img/invitation/*
-
-
-/public/img/user/profile/*.png
-/public/img/user/profile/*.jpg
-/public/img/user/profile/*.jpeg
