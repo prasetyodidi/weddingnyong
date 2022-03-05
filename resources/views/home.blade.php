@@ -36,7 +36,117 @@
         <div id="feature" class="min-h-screen mb-5">
             <h1 class="text-center md:text-3xl">Fitur Undangan</h1>
             <div class="flex flex-col items-center justify-center mt-14 md:grid md:grid-cols-2 md:gap-4 md:justify-items-center lg:grid-cols-3 lg:gap-4 lg:justify-items-stretch">
-                @for ($i = 0; $i < 10; $i++)
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-map-marked-alt text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Navigasi Lokasi</h1>
+                        <p class="text-sm">Tampilkan peta lokasi yang lebih baik dan akurat melalui google maps</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-envelope text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Amplop Digital</h1>
+                        <p class="text-sm">Tamu dapat mengirimkan amplop digital</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-images text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Galerry Foto</h1>
+                        <p class="text-sm">Undangan pernikahan akan tampil lebih menarik dengan kumpulan foto-foto prewedding Anda.</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-music text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Backsound Musik</h1>
+                        <p class="text-sm">Pilih musik sesuai keinginan kamu agar undanganmu lebih ekslusif dan romantis</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-book text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Buku Tamu</h1>
+                        <p class="text-sm">Tamu undangan bisa mengirim ucapan dan doa melalui fitur buku tamu</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-clock text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Count Down</h1>
+                        <p class="text-sm">Tersedia fitur countdown timer yang dapat berfungsi sebagai pengingat waktu acara</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-head-side-mask text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Protokol Kesehatan</h1>
+                        <p class="text-sm">Tampilkan Prokes Kesehatan yang harus digunakan</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-qrcode text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Check-In di lokasi</h1>
+                        <p class="text-sm">Scan QRCode dan catat tamu yang hadir secara otomatis</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-calendar-alt text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Add To Calendar</h1>
+                        <p class="text-sm">Jangan sampai terlewatkan moment indah kamu, pasang pengigat di google calendar</p>
+                    </div>
+                </div>
+                <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
+                            <i class="fas fa-video text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex flex-col w-10/12 mt-1 mb-1">
+                        <h1 class=" mb-2">Live Streaming</h1>
+                        <p class="text-sm">Bagikan momen bahagia kepada tamu yang tidak dapat hadir</p>
+                    </div>
+                </div>
+                {{-- @for ($i = 0; $i < 10; $i++)
                     <div class="flex justify-between border-2 border-primary w-64 h-32 mt-3 lg:mt-0 lg:justify-self-center">
                         <div class="flex items-center">
                             <div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary -ml-7">
@@ -48,7 +158,7 @@
                             <p class="text-sm">Tampilkan peta lokasi yang lebih baik dan akurat melalui google maps</p>
                         </div>
                     </div>
-                @endfor
+                @endfor --}}
             </div>
         </div>
 
@@ -63,12 +173,39 @@
                     <p class="text-sm">Paket Bronze</p>
     
                     <div class="mt-6">
-                        @for ($i = 0; $i < 6; $i++)
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Masa aktif 2 hari
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Hitung mundur acara 
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Tema modern
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Info pasangan
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Informasi prokes
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Background musik
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Quote
+                        </p>
+                        {{-- @for ($i = 0; $i < 6; $i++)
                             <p>
                                 <i class="fas fa-check text-green-400"></i>
                                 Background musik
                             </p>
-                        @endfor
+                        @endfor --}}
                         <div class="h-10 w-28 rounded-md bg-primary mt-3 hover:cursor-pointer">
                             <p class="leading-10 text-center text-lg text-white">Pilih Paket</p>
                         </div>
@@ -80,12 +217,47 @@
                     <p class="text-sm">Paket Silver</p>
     
                     <div class="mt-6">
-                        @for ($i = 0; $i < 10; $i++)
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Masa aktif 2 hari
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Hitung mundur acara 
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Tema modern
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Info pasangan
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Informasi prokes
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Background musik
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Masa aktif selamanya
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Navigasi lokasi
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Ingatkan google calendar
+                        </p>
+                        {{-- @for ($i = 0; $i < 10; $i++)
                             <p>
                                 <i class="fas fa-check text-green-400"></i>
                                 Background musik
                             </p>
-                        @endfor
+                        @endfor --}}
                         <div class="h-10 w-28 rounded-md bg-primary mt-3 hover:cursor-pointer">
                             <p class="leading-10 text-center text-lg text-white">Pilih Paket</p>
                         </div>
@@ -97,12 +269,63 @@
                     <p class="text-sm text-white">Paket Gold</p>
     
                     <div class="mt-6">
-                        @for ($i = 0; $i < 15; $i++)
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Masa aktif 2 hari
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Hitung mundur acara 
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Tema modern
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Info pasangan
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Informasi prokes
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Background musik
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Masa aktif selamanya
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Navigasi lokasi
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Ingatkan google calendar
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Love story
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Amplop digital
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            RSVA ke email
+                        </p>
+                        <p>
+                            <i class="fas fa-check text-green-400"></i>
+                            Scan QR tamu undangan
+                        </p>
+                        {{-- @for ($i = 0; $i < 15; $i++)
                             <p class="text-white">
                                 <i class="fas fa-check text-green-400"></i>
                                 Background musik
                             </p>
-                        @endfor
+                        @endfor --}}
                         <div class="h-10 w-28 rounded-md bg-white mt-3 hover:cursor-pointer">
                             <p class="leading-10 text-center text-lg text-black">Pilih Paket</p>
                         </div>
