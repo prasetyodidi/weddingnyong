@@ -10,7 +10,7 @@
     <title>Landing page</title>
 </head>
 <body>
-    <div class="container relative min-h-screen mx-auto overflow-hidden pb-16">       
+    <div class="container relative min-h-screen mx-auto overflow-hidden">       
         <x-header></x-header>
         
         <div class="w-full min-h-screen lg:min-h-screen">
@@ -22,8 +22,8 @@
                     <p class="text-2xl lg:text-4xl">Sekarang Zamannya Undangan Pernikahan Website</p>
                     <p class="text-base lg:text-lg">Bagikan momen spesialmu dengan cara yang spesial bersama kami, nikmati diskon 50%</p>
         
-                    <div class="w-40 h-10 bg-primary rounded-2xl text-white mt-12">
-                        <a href="/invitation/create" class="text-center text-lg leading-10 hover:cursor-pointer">Buat Sekarang</a>
+                    <div class="w-40 h-10 bg-primary rounded-2xl text-white mt-12 shadow-lg hover:shadow-primary/50">
+                        <a href="/invitation/create" class="text-center text-lg leading-10">Buat Sekarang</a>
                     </div>
                 </div>
                 <div class="hidden w-4/12 lg:block lg:overflow-hidden">
@@ -69,7 +69,7 @@
                                 Background musik
                             </p>
                         @endfor
-                        <div class="h-10 w-28 rounded-md bg-primary mt-3">
+                        <div class="h-10 w-28 rounded-md bg-primary mt-3 hover:cursor-pointer">
                             <p class="leading-10 text-center text-lg text-white">Pilih Paket</p>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                                 Background musik
                             </p>
                         @endfor
-                        <div class="h-10 w-28 rounded-md bg-primary mt-3">
+                        <div class="h-10 w-28 rounded-md bg-primary mt-3 hover:cursor-pointer">
                             <p class="leading-10 text-center text-lg text-white">Pilih Paket</p>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                                 Background musik
                             </p>
                         @endfor
-                        <div class="h-10 w-28 rounded-md bg-white mt-3">
+                        <div class="h-10 w-28 rounded-md bg-white mt-3 hover:cursor-pointer">
                             <p class="leading-10 text-center text-lg text-black">Pilih Paket</p>
                         </div>
                     </div>
@@ -122,13 +122,13 @@
                             <img class="w-full group-hover:rotate-12 group-hover:scale-110 ease-in duration-200" src="{{ $item->thumb }}" alt="thumb design">
                             <div class="absolute hidden group-hover:block duration-700 left-0 top-0 right-0 bottom-0 bg-slate-300 opacity-60"></div>
                         </div>
-                        <div class="h-14 leading-14">
-                            <p class="border-2 leading-14">{{ $item->name }}</p>
+                        <div class="h-14 pl-5">
+                            <p class="leading-14">{{ $item->name }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <a href="{{ route('design.index') }}" class="block no-underline h-9 w-48 bg-primary rounded-2xl mt-7 mx-auto text-white text-center leading-9">Lihat Desain Lainnya</a>
+            <a href="{{ route('design.index') }}" class="block no-underline h-9 w-48 bg-primary rounded-2xl mt-7 mx-auto text-white text-center leading-9 hover:shadow-lg shadow-primary/50">Lihat Desain Lainnya</a>
         </div>
 
         {{-- Testimoni --}}
