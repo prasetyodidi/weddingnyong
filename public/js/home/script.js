@@ -1,15 +1,3 @@
-document.getElementById("menu").addEventListener("click", function () {
-  console.log("click");
-  document.getElementById("mobile-nav").classList.remove("translate-x-full");
-  
-})
-    
-document.getElementById("close-menu").addEventListener("click", function () {
-  document.getElementById("mobile-nav").classList.add("translate-x-full");
-      
-})
-
-
 var slideIndex = 1;
 showDivs(slideIndex);
 

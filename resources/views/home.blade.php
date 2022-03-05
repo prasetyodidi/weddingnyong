@@ -13,7 +13,7 @@
     <div class="container relative min-h-screen mx-auto overflow-hidden">       
         <x-header></x-header>
         
-        <div class="w-full min-h-screen lg:min-h-screen">
+        <div class="w-full min-h-screen lg:min-h-screen flex items-center">
             <div class="flex flex-col lg:flex-row h-full">
                 <div class="w-full flex justify-center mt-12 lg:w-4/12 lg:h-full lg:mt-0 lg:justify-end lg:items-center">
                     <img src="/img/web/drew-coffman-llWjwo200fo-unsplash_compress12.jpg" alt="wedding" class="w-3/4 rounded-md lg:w-auto lg:h-44 lg:-mb-32 lg:mt-96">
@@ -335,7 +335,7 @@
         </div>
 
         {{-- Tema / Design --}}
-        <div class="flex flex-col min-h-screen px-4 mb-20">
+        <div class="flex flex-col min-h-screen px-4 mb-20" id="theme">
             <h1 class="text-center text-3xl">Pilihan Desain</h1>
             <p class="text-center">Pilih dan gunakan tema undangan pernikahan yang menarik serta unik</p>
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-7">

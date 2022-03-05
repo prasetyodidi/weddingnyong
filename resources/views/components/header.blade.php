@@ -1,4 +1,4 @@
-<div id="mobile-nav" class="fixed w-1/2 top-0 right-0 bottom-0 bg-white border-2 shadow-lg translate-x-full ease-in duration-300 z-50">
+<div id="mobile-nav" class="fixed w-1/2 top-0 right-0 bottom-0 bg-white border-2 shadow-lg translate-x-full ease-in duration-300 z-100">
     <i id="close-menu" class="fas fa-times absolute top-5 right-5 text-2xl"></i>
     <div class="flex flex-col w-full h-full items-center justify-evenly hover:cursor-pointer">
         <a href="#feature" class="hover:border-b-2 border-primary">Fitur</a>
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="flex flex-col fixed w-full">
+<div class="flex flex-col fixed w-full z-50">
     <div class="h-14 w-full box-border flex justify-between items-center pl-5 pr-5 bg-white lg:h-20">
         <h1 class="font-bold md:text-3xl">Weddingnyong</h1>
         <i class="fas fa-align-right text-2xl lg:hidden" id="menu"></i>
