@@ -45,4 +45,14 @@ class Invitation extends Model
     {
         return $this->hasMany(Attendee_list::class);
     }
+
+    public static function getInvitationByuser($userId)
+    {
+        return Invitation::where('user_id', $userId)->latest()->get();
+    }
+
+    public static function getInvitationBySlug($invitation_slug)
+    {
+        return Invitation::where('slug', $invitation_slug)->get()->first();
+    }
 }

@@ -15,10 +15,10 @@
             {{-- nav link --}}
             <div class="flex relative group w-1/2 justify-end items-center hover:cursor-pointer ">
                 <i class="fas fa-bell text-gray-primary text-xl"></i>
-                <img class="inline object-cover w-10 h-10 rounded-full" src="/img/web/—Pngtree—profile glyph black icon_4008321.png" alt="Profile image"/>
+                <img class="inline object-cover w-10 h-10 rounded-full" src="/{{ auth()->user()->profile_image }}" alt="Profile image"/>
                 <p>Hello, {{ auth()->user()->name }}</p>
-                <div class="absolute hidden text-center top-0 px-7 py-2 bg-white rounded-md border-2 shadow-md w-0 group-hover:w-auto group-hover:block group-hover:ease-in duration-700 ">
-                    <img class="rounded-full w-11 h-11 mx-auto border-2" src="{{ auth()->user()->profile_image }}" alt="profile">
+                <div class="absolute z-20 hidden text-center top-0 px-7 py-2 bg-white rounded-md border-2 shadow-md w-0 group-hover:w-auto group-hover:block group-hover:ease-in duration-700 ">
+                    <img class="rounded-full w-11 h-11 mx-auto border-2" src="/{{ auth()->user()->profile_image }}" alt="profile">
                     <h2>{{ auth()->user()->name }}</h2>
                     <p class="text-sm text-gray-600">{{ auth()->user()->email }}</p>
                     <p class="text-sm">{{ auth()->user()->address ? auth()->user()->address : 'Anda belum menambahkan alamat' }}</p>
@@ -32,33 +32,33 @@
             {{-- icon --}}
             <div class="flex flex-col items-center justify-between w-1/12 bg-white rounded-lg py-5">
                 <div class="flex flex-col w-5/6 h-2/3 justify-around items-center lg:items-start">
-                    <a href="/dashboard" class="flex flex-row-reverse lg:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                    <a href="/dashboard" class="flex flex-row-reverse rounded-md md:h-auto cursor-pointer hover:border-b-2 hover:border-b-primary">
                         <p class="hidden lg:block lg:leading-6">Home</p>&nbsp;
                         <i class="{{ Request::is('dashboard') ? 'text-primary' : 'text-gray-400'}} fas fa-home hover:text-primary lg:leading-6"></i>
                     </a>
-                    <a href="/dashboard/invitation" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                    <a href="/dashboard/invitation" class="flex flex-row-reverse md:h-auto cursor-pointer hover:border-b-2 hover:border-b-primary">
                         <p class="hidden lg:block lg:leading-6">Invitation</p>&nbsp;
                         <i class="{{ Request::is('dashboard/invitation') ? 'text-primary' : 'text-gray-400' }} fas fa-envelope text-gray-400 hover:text-primary lg:leading-6"></i>
                     </a>
-                    <a href="/dashboard/guest-book" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                    <a href="/dashboard/guest-book" class="flex flex-row-reverse md:h-autouto cursor-pointer hover:border-b-2 hover:border-b-primary">
                         <p class="hidden lg:block md:left-6">Guest book</p>&nbsp;
                         <i class="{{ Request::is('dashboard/guest-book') ? 'text-primary' : 'text-gray-400' }} fas fa-comment text-gray-400 hover:text-primary lg:leading-6"></i>
                     </a>
-                    <a href="/dashboard/attendee-list" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                    <a href="/dashboard/attendee-list" class="flex flex-row-reverse md:h-auto cursor-pointer hover:border-b-2 hover:border-b-primary">
                         <p class="hidden lg:block md:left-6">attendee list</p>
                         <i class="{{ Request::is('dashboard/attendee-list') ? 'text-primary' : 'text-gray-400' }} fas fa-handshake hover:text-primary lg:leading-6"></i>
                     </a>
                     @can('admin')
-                        <a href="/dashboard/user" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                        <a href="/dashboard/user" class="flex flex-row-reverse md:h-auto cursor-pointer hover:border-b-2 hover:border-b-primary">
                             <p class="hidden lg:block md:left-6">User</p>
                             <i class="{{ Request::is('dashboard/user') ? 'text-primary' : 'text-gray-400' }} fas fa-user hover:text-primary lg:leading-6"></i>
                         </a>
-                        <a href="/dashboard/design" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                        <a href="/dashboard/design" class="flex flex-row-reverse md:h-auto cursor-pointer hover:border-b-2 hover:border-b-primary">
                             <p class="hidden lg:block md:left-6">Design</p>
                             <i class="fas fa-palette {{ Request::is('dashboard/design') ? 'text-primary' : 'text-gray-400' }} hover:text-primary lg:leading-6"></i>
                         </a>
                     @endcan
-                    <a href="/dashboard/profile" class="flex flex-row-reverse md:h-6 cursor-pointer hover:border-b-2 hover:border-b-primary">
+                    <a href="/dashboard/profile" class="flex flex-row-reverse md:h-auto cursor-pointer hover:border-b-2 hover:border-b-primary">
                         <p class="hidden lg:block md:left-6">Profile</p>
                         <i class="{{ Request::is('dashboard/profile') ? 'text-primary' : 'text-gray-400' }} fas fa-user-circle hover:text-primary lg:leading-6"></i>
                     </a>

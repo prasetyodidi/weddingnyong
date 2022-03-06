@@ -16,16 +16,8 @@ class Attendee_list extends Model
         return $this->belongsTo(Invitation::class);
     }
 
-    public static function getAttendeeListInfoInDashboard()
+    public static function getGuestBookByInvitation($invitation_id)
     {
-        $user = auth()->user();
-        $rsInvitations = [];
-        if ($user->role_id == 0) {
-            $rsInvitations = Invitation::where('user_id', $user->id)->with('attendeeLists')->get();
-        } else {
-            $rsInvitations = Invitation::with('attendeeLists')->get();
-        }
-
-        return $rsInvitations;
+        return Attendee_list::where('invitation_id', $invitation_id)->latest()->get();
     }
 }

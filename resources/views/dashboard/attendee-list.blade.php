@@ -4,123 +4,82 @@
     <div class="w-full h-full p-3 overflow-hidden">
         <h1 class="text-2xl">Attendee List</h1>
 
-        <div class="w-full h-24 flex items-center justify-around rounded-md mt-3">
-            @foreach ($invitations as $invitation)
-            @if ($loop->iteration == 1)
-                <div onclick="invitation('{{ $loop->iteration - 1 }}')" class="invitation flex flex-col  w-20 h-20 rounded-md bg-primary opacity-60 text-black text-sm border-primary border-2 border-opacity-20 cursor-pointer">
-                    <h1 href="#" class="h-2/3 text-center px-1">
-                        {{ $invitation->slug }}
-                    </h1>
-                    {{-- <p class="h-1/3 text-center">
-                        Active
-                        <i class="fas fa-chevron-right"></i>
-                    </p> --}}
-                </div>
-            @else
-                <div onclick="invitation('{{ $loop->iteration - 1 }}')" class="invitation flex flex-col  w-20 h-20 rounded-md bg-white opacity-60 text-black text-sm border-primary border-2 border-opacity-20 cursor-pointer">
-                    <h1 href="#" class="h-2/3 text-center px-1">
-                        {{ $invitation->slug }}
-                    </h1>
-                    {{-- <p class="h-1/3 text-center">
-                        Active
-                        <i class="fas fa-chevron-right"></i>
-                    </p> --}}
-                </div>
-            @endif
-                
-            @endforeach
+        <div class="w-full overflow-y-hidden overflow-x-scroll mt-7 bg-transparent lg:w-full lg:mt-0 lg:relative lg:z-20 ">
+            <div id="my-slider" class="flex justify-start ease-in duration-300 lg:my-3">
+                @foreach ($invitations as $item)
+                    @if ($item->slug == $invitation->slug)
+                        <div class="my-slides group relative flex flex-col shrink-0 justify-between w-20 h-20 mx-5 rounded-md bg-primary opacity-60 text-black text-sm border-primary border-2 border-opacity-20">
+                            <h1 href="#" class="h-2/3 text-center px-1">
+                                {{ $item->slug }}
+                            </h1>
+                            <p class="h-1/3 text-center">
+                                {{ count($item->guestBooks) }}
+                                <form action="{{ route('dashboard.attendee_list') }}" method="GET" class="absolute hidden left-0 top-0 right-0 bottom-0 group-hover:flex justify-center bg-gray-400/50">
+                                    <input type="hidden" name="invitation_slug" value="{{ $item->slug }}">
+                                    <button type="submit" class="hover:cursor-pointer">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </form>
+                            </p>
+                        </div>
+                    @else
+                        <div class="my-slides group relative flex flex-col shrink-0 justify-between w-20 h-20 mx-5 rounded-md bg-white opacity-60 text-black text-sm border-primary border-2 border-opacity-20">
+                            <h1 href="#" class="h-2/3 text-center px-1">
+                                {{ $item->slug }}
+                            </h1>
+                            <p class="h-1/3 text-center">
+                                {{ count($item->guestBooks) }}
+                                <form action="{{ route('dashboard.guest_book') }}" method="GET" class="absolute hidden left-0 top-0 right-0 bottom-0 group-hover:flex justify-center bg-primary/50">
+                                    <input type="hidden" name="invitation_slug" value="{{ $item->slug }}">
+                                    <button type="submit" class="hover:cursor-pointer">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </form>
+                            </p>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
         </div>
-        <table class="table-auto w-4/5 mt-6">
-            <thead>
-                <tr class="bg-primary h-12 text-white">
-                    <th class="border-2 w-9">No</th>
-                    <th class="border-2">Name</th>
-                    <th class="border-2">Invitation</th>
-                    <th class="border-2">Address</th>
-                    <th class="border-2">Created</th>
-                    <th class="border-2">Action</th>
-                </tr>
-            </thead>
-            <tbody id="table-attendee-list" class="h-36 overflow-x-scroll">
-                @for ($j = 0; $j < count($invitations[0]->attendeeLists); $j++)
-                    <tr class="hover:bg-yellow-100 h-12">
-                        <td class="w-9 text-center">{{ $j+1 }}</td>
-                        <td>{{ $invitations[0]['slug'] }}</td>
-                        <td>{{ $invitations[0]->attendeeLists[$j]->name }}</td>
-                        <td>{{ $invitations[0]->attendeeLists[$j]->address }}</td>
-                        <td>{{ $invitations[0]->attendeeLists[$j]->created_at->diffForHumans() }}</td>
-                        <td class="flex items-center h-12 justify-evenly">
-                            <a href="{{ route('invitation.show', $invitations[0]) }}" class="hover:cursor-pointer">
-                                <i class="fas fa-eye text-blue-500"></i>
-                            </a>
-                            <a href="#" class="hover:cursor-pointer">
-                                <i class="fas fa-edit text-yellow-500"></i>
-                            </a>
-                            <a href="#" class="hover:cursor-pointer">
-                                <i class="fas fa-times text-red-500"></i>
-                            </a>
-                        </td>
+        <div class="w-11/12">
+            <table class="text-left w-full">
+                <thead class="bg-black flex text-white w-full">
+                    <tr class="flex w-full">
+                        <th class="border-2 py-4 px-2 w-9">No</th>
+                        <th class="border-2 p-4 w-1/5">Name</th>
+                        <th class="border-2 p-4 w-1/5">Invitation</th>
+                        <th class="border-2 p-4 w-1/4">Address</th>
+                        {{-- <th class="border-2 p-4 w-1/6">QR</th> --}}
+                        <th class="border-2 p-4 w-1/6">Created</th>
+                        <th class="border-2 p-4 w-1/6">Action</th>
                     </tr>
-                @endfor 
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="table-attendee-list" class="bg-grey-light flex flex-col overflow-y-scroll w-full" style="height: 50vh">
+                    @for ($j = 0; $j < count($attendeeLists); $j++)
+                        <tr class="hover:bg-yellow-100 h-12 flex w-full mb-4">
+                            <td class="py-3 px-2 w-9 text-center">{{ $j+1 }}</td>
+                            <td class="w-1/5 pl-2 flex items-center">{{ $invitation['slug'] }}</td>
+                            <td class="w-1/5 pl-2 flex items-center">{{ $attendeeLists[$j]->name }}</td>
+                            <td class="w-1/4 pl-2 flex items-center">{{ $attendeeLists[$j]->address }}</td>
+                            {{-- <td class="w-1/6 pl-2 flex items-center"><img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Exampl" alt="qr"></td> --}}
+                            <td class="w-1/6 pl-2 flex items-center">{{ $attendeeLists[$j]->created_at->diffForHumans() }}</td>
+                            <td class="flex w-1/6 items-center h-12 justify-evenly">
+                                <a href="{{ route('invitation.show', $invitations[0]) }}" class="hover:cursor-pointer">
+                                    <i class="fas fa-eye text-blue-500"></i>
+                                </a>
+                                <a href="#" class="hover:cursor-pointer">
+                                    <i class="fas fa-edit text-yellow-500"></i>
+                                </a>
+                                <a href="#" class="hover:cursor-pointer">
+                                    <i class="fas fa-times text-red-500"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endfor 
+                </tbody>
+            </table>
+        
+        </div>
     </div>
 @endsection
 
-<script>
-    let invitationsJson = '<?= ($invitationsJson); ?>';
-    // console.log(invitationsJson);
-    invitationsJson = invitationsJson.replace(/'/g, "\\'").replace(/\n/g, "\\n");
-    let invitations = JSON.parse(invitationsJson);
-    console.log(invitationsJson);
-    // console.log(invitations);
-
-    function invitation(index) {
-        console.log(index);
-
-        // mengubah data table
-        let table = document.getElementById('table-attendee-list');
-        let newElements = [];
-        for (let j = 0; j < invitations[index]["attendee_list"].length; j++){
-            let nomor = j+1;
-            let newElement = `<tr class="hover:bg-yellow-100 h-12">
-                    <td>` + nomor + `</td>
-                    <td>` + invitations[index]["invitation_slug"] + `</td>
-                    <td>` + invitations[index]["attendee_list"][j]["name"] + `</td>
-                    <td>` + invitations[index]["attendee_list"][j]["address"] + `</td>
-                    <td>` + invitations[index]["attendee_list"][j]["created_at"] + `</td>
-                    <td class="flex items-center h-12 justify-evenly">
-                        <a href="/invitation/`+ invitations[index]["invitation_slug"] +`" class="hover:cursor-pointer">
-                            <i class="fas fa-eye text-blue-500"></i>
-                        </a>
-                        <a href="#" class="hover:cursor-pointer">
-                            <i class="fas fa-edit text-yellow-500"></i>
-                        </a>
-                        <a href="#" class="hover:cursor-pointer">
-                            <i class="fas fa-times text-red-500"></i>
-                        </a>
-                    </td>
-                </tr>`;
-            newElements = newElements.concat(newElement);
-        }
-        table.innerHTML = newElements;
-        console.log('element');
-        console.log(newElements);
-
-        let invitation = invitations[index];
-        console.log(invitation);
-        let invitationElements = document.getElementsByClassName('invitation')
-        for (let i = 0; i < invitationElements.length; i++) {
-            const element = invitationElements[i];
-            // mengubah tab active
-            element.classList.remove('bg-primary');
-            element.classList.remove('bg-white');
-            if (i == index) {
-                element.classList.add('bg-primary');
-            } else {
-                element.classList.add('bg-white');
-            }
-        }
-    }
-
-</script>

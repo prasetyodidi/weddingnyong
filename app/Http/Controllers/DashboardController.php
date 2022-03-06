@@ -22,77 +22,63 @@ class DashboardController extends Controller
 
         $data = [];
         if ($user['role_id'] >= 1) {
-            $data['invitations'] = Invitation::with(['price', 'user', 'guestBooks'])->latest()->get();
-            // $data['invitations'] = Invitation::all();
+            $data['invitations'] = Invitation::with(['price', 'user', 'guestBooks'])->latest()->paginate(5);
         } else {
-            $data['invitations'] = Invitation::with('guestBooks')->where('user_id', $user->id)->with(['price'])->get();
+            $data['invitations'] = Invitation::with(['price', 'guestBooks'])->where('user_id', $user->id)->paginate(5);
         }
 
         return view('dashboard/invitation', $data);
     }
 
-    public function guestBooks()
-    {
-        $invitations = Guest_book::getGuestBookInfoInDashboard();
-        $invitationsJs = [];
-        for ($i = 0; $i < count($invitations); $i++) {
-            $guestBooks = [];
-            for ($j = 0; $j < count($invitations[$i]->guestBooks); $j++) {
-                $guestBooks[$j] = [
-                    'id' => $invitations[$i]->guestBooks[$j]->id,
-                    'invitation_id' => $invitations[$i]->guestBooks[$j]->invitation_id,
-                    'name' => $invitations[$i]->guestBooks[$j]->name,
-                    'message' => $invitations[$i]->guestBooks[$j]->message,
-                    'confirmation' => $invitations[$i]->guestBooks[$j]->confirmation,
-                    'created_at' => $invitations[$i]->guestBooks[$j]->created_at->toDateString(),
-                    'updated_at' => $invitations[$i]->guestBooks[$j]->updated_at->toDateString(),
-                ];
-            }
-            $invitationsJs[$i] = [
-                'invitation_slug' => $invitations[$i]->slug,
-                'guest_book' => $guestBooks
-            ];
-        }
-
-        $invitationsJson = json_encode($invitationsJs);
-
-        return view('dashboard/guest-book', compact('invitations', 'invitationsJs', 'invitationsJson'));
-    }
-
-    public function attendeeList()
+    public function guestBooks(Request $request)
     {
         $user = auth()->user();
-
-        $invitations = Attendee_list::getAttendeeListInfoInDashboard();
-        $invitationsJs = [];
-        for ($i = 0; $i < count($invitations); $i++) {
-            $attendeeLists = [];
-            for ($j = 0; $j < count($invitations[$i]->attendeeLists); $j++) {
-                $attendeeLists[$j] = [
-                    'id' => $invitations[$i]->attendeeLists[$j]->id,
-                    'invitation_id' => $invitations[$i]->attendeeLists[$j]->invitation_id,
-                    'name' => $invitations[$i]->attendeeLists[$j]->name,
-                    'address' => preg_replace("/'/i", " ", $invitations[$i]->attendeeLists[$j]->address),
-                    'created_at' => $invitations[$i]->attendeeLists[$j]->created_at->toDateString(),
-                    'updated_at' => $invitations[$i]->attendeeLists[$j]->updated_at->toDateString(),
-                ];
-            }
-            $invitationsJs[$i] = [
-                'invitation_slug' => $invitations[$i]->slug,
-                'attendee_list' => $attendeeLists
-            ];
+        $invitations = [];
+        if ($user->role_id == 1) {
+            $invitations = Invitation::latest()->get();
+        } else {
+            $invitations = Invitation::getInvitationByuser(auth()->user()->id);
+        }
+        $invitation = [];
+        $guestBooks = [];
+        $invitation_slug = $request->invitation_slug;
+        if (isset($invitation_slug)) {
+            $invitation = Invitation::getInvitationBySlug($invitation_slug);
+            $guestBooks = Guest_book::getGuestBookByInvitation($invitation['id']);
+        } else {
+            $invitation = $invitations[0];
+            $guestBooks = Guest_book::getGuestBookByInvitation($invitation->id);
         }
 
-        $invitationsJson = json_encode($invitationsJs);
-        // dd($invitationsJs);
+        return view('dashboard/guest-book', compact('invitations', 'invitation', 'guestBooks'));
+    }
 
-        return view('dashboard/attendee-list', compact('invitations', 'invitationsJson', 'invitationsJs'));
+    public function attendeeList(Request $request)
+    {
+        $user = auth()->user();
+        $invitations = [];
+        if ($user->role_id == 1) {
+            $invitations = Invitation::latest()->get();
+        } else {
+            $invitations = Invitation::getInvitationByuser(auth()->user()->id);
+        }
+        $invitation = [];
+        $attendeeLists = [];
+        $invitation_slug = $request->invitation_slug;
+        if (isset($invitation_slug)) {
+            $invitation = Invitation::getInvitationBySlug($invitation_slug);
+            $attendeeLists = Attendee_list::getGuestBookByInvitation($invitation['id']);
+        } else {
+            $invitation = $invitations[0];
+            $attendeeLists = Attendee_list::getGuestBookByInvitation($invitation->id);
+        }
+
+        return view('dashboard/attendee-list', compact('invitations', 'invitation', 'attendeeLists'));
     }
 
     public function users()
     {
         $data['users'] = User::getUserInfoInDashboardAdmin();
-        // dd($data);
 
         return view('dashboard/user', $data);
     }
@@ -101,5 +87,12 @@ class DashboardController extends Controller
     {
         $designs = Design::latest()->paginate(3);
         return view('dashboard/design', compact('designs'));
+    }
+
+    public function profile()
+    {
+        $user = auth()->user();
+
+        return view('dashboard.profile', compact('user'));
     }
 }

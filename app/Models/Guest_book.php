@@ -16,16 +16,8 @@ class Guest_book extends Model
         return $this->belongsTo(Invitation::class);
     }
 
-    public static function getGuestBookInfoInDashboard()
+    public static function getGuestBookByInvitation($invitation_id)
     {
-        $user = auth()->user();
-        $rsInvitations = [];
-        if ($user->role_id == 0) {
-            $rsInvitations = Invitation::where('user_id', $user->id)->with('guestBooks')->latest()->paginate(4);
-        } else {
-            $rsInvitations = Invitation::with('guestBooks')->latest()->paginate(4);
-        }
-
-        return $rsInvitations;
+        return Guest_book::where('invitation_id', $invitation_id)->latest()->get();
     }
 }
