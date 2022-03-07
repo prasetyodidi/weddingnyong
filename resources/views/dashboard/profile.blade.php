@@ -25,8 +25,22 @@
                         <tr>
                             <td>Alamat</td>
                             <td>
-                                <textarea name="address" id="address" cols="30" rows="10">{{ old('address', $user->address)  }}</textarea>
+                                <textarea name="address" id="address" cols="30" rows="3">{{ old('address', $user->address)  }}</textarea>
                                 <x-validation-message name="address"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Kirim konfirmasi RSVP ke email? </td>
+                            <td>
+                                <div class="flex justify-start">
+                                    <div class="form-check form-switch">
+                                        @if ($user->rsvp_email)
+                                            <input name="rsvp_email" class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                                        @else
+                                            <input name="rsvp_email" class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                        @endif
+                                    </div>
+                                    </div>
                             </td>
                         </tr>
                     </tbody>
