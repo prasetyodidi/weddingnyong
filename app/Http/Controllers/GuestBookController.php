@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Guest_book;
 use App\Models\Invitation;
-use App\Http\Requests\StoreGuest_bookRequest;
 use App\Http\Requests\UpdateGuest_bookRequest;
+use App\Mail\ExampleMailables;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class GuestBookController extends Controller
 {
@@ -44,12 +47,28 @@ class GuestBookController extends Controller
             return "blocked";
         }
 
-        $request->validate([
+        // $request->validate([
+        //     'invitation_id' => 'required',
+        //     'name' => ['required'],
+        //     'message' => ['required'],
+        //     'confirmation' => ['required', 'boolean']
+        // ]);
+
+        $validator = Validator::make($request->all(), [
             'invitation_id' => 'required',
             'name' => ['required'],
             'message' => ['required'],
             'confirmation' => ['required', 'boolean']
         ]);
+
+        if ($validator->fails()) {
+            return redirect(route('invitation.show', $invitation))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = $validator->validated();
+
 
         $data = [
             'invitation_id' => $request->invitation_id,
@@ -58,9 +77,14 @@ class GuestBookController extends Controller
             'confirmation' => $request->confirmation
         ];
 
-        // dd($data);
-
         Guest_book::create($data);
+
+
+        // check user allow to get rsva email
+        $invitationOwner = User::getUserByInvitationId($data['invitation_id']);
+        if ($invitationOwner['rsvp_email']) {
+            Mail::to($invitationOwner['email'])->send(new ExampleMailables($data['name'], $data['message'], $data['confirmation']));
+        }
 
         return Redirect::back();
     }

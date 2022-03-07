@@ -55,4 +55,9 @@ class Invitation extends Model
     {
         return Invitation::where('slug', $invitation_slug)->get()->first();
     }
+
+    public static function getUserIdOfInvitationById($invitationId)
+    {
+        return Invitation::where('id', $invitationId)->get()->first()['user_id'];
+    }
 }

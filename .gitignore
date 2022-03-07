@@ -16,3 +16,8 @@ yarn-error.log
 
 /public/img/user/profile/*
 /public/img/invitation/*
+
+
+*.puml
+/app/Mail/ExampleMailables.php
+/resources/views/emails/test.blade.php

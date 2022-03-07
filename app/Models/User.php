@@ -67,4 +67,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $users;
     }
+
+    public static function getUserByInvitationId($invitationId)
+    {
+        $userId = Invitation::getUserIdOfInvitationById($invitationId);
+        return User::where('id', $userId)->get()->first();
+    }
+
+    public static function getUserRsvp($invitationId)
+    {
+        $userId = Invitation::getUserIdOfInvitationById($invitationId);
+        return User::where('id', $userId)->get()->first()['rsvp_email'];
+    }
 }
