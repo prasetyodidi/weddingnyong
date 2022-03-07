@@ -136,6 +136,7 @@ class InvitationController extends Controller
     // only invitee owner & admin
     public function edit(Invitation $invitation)
     {
+        $this->checkOwnerOrAdmin($invitation);
         $designs = Design::all();
         return view('invitation/edit', compact('invitation', 'designs'));
     }
@@ -211,5 +212,12 @@ class InvitationController extends Controller
         $name = $names['groom_name'] . '-' . $names['bride_name'];
         $slug = SlugService::createSlug(Invitation::class, 'slug', $name);
         return $slug;
+    }
+
+    private function checkOwnerOrAdmin(Invitation $invitation)
+    {
+        if (auth()->user()->id != $invitation['user_id'] || !auth()->user()->role_id > 0) {
+            abort(403, 'This access is blocked');
+        }
     }
 }

@@ -8,12 +8,12 @@
     <title>Membuat Undangan</title>
 </head>
 <body>
-    {{-- header --}}
-    <x-header></x-header>
-
-    <div class="container relative min-h-screen px-6 overflow-x-hidden mx-auto">
-        <h1 class="text-3xl">Halaman membuat undangan</h1>
-        <p>isi data diri kamu dengan pasangan di sini</p>
+    <div class="container relative min-h-screen mx-auto overflow-hidden">
+        <x-header></x-header>
+        <div class="w-full mt-16 lg:mt-20">
+            <h1 class="text-3xl">Halaman membuat undangan</h1>
+            <p>isi data diri kamu dengan pasangan di sini</p>
+        </div>
         <form action="/invitation" method="post" enctype="multipart/form-data" class="container Smt-3">
             @csrf
             <input type="hidden" name="design_slug" value="summer">
@@ -42,18 +42,18 @@
                 <div class="md:w-5/12">
                     <p class="md:text-center md:text-lg lg:text-2xl">Nama mempelai</p>
                     <div class="flex flex-col justify-between mb-3">
-                        <input type="text" name="bride_name" placeholder="wanita">
+                        <input type="text" name="bride_name" placeholder="wanita" value="{{ old('bride_name') }}">
                         <x-validation-message name="bride_name"/>
-                        <input type="text" name="groom_name" placeholder="pria" class="mt-3">
+                        <input type="text" name="groom_name" placeholder="pria" class="mt-3" value="{{ old('groom_name') }}">
                         <x-validation-message name="groom_name"/>
                     </div>
                 </div>
                 <div class="md:w-5/12">
                     <p class="md:text-center md:text-lg lg:text-2xl">Nama lengkap mempelai</p>
                     <div class="flex flex-col justify-between mb-3">
-                        <input type="text" name="bride_fullname" placeholder="wanita">
+                        <input type="text" name="bride_fullname" placeholder="wanita" value="{{ old('bride_fullname') }}">
                         <x-validation-message name="bride_fullname"/>
-                        <input type="text" name="groom_fullname" placeholder="pria" class="mt-3">
+                        <input type="text" name="groom_fullname" placeholder="pria" class="mt-3" value="{{ old('groom_fullname') }}">
                         <x-validation-message name="groom_fullname"/>
                     </div>
                 </div>
@@ -62,11 +62,11 @@
                 <p class="text-center md:text-lg lg:text-2xl">Info mempelai</p>
                 <div class="flex flex-col justify-between mb-3 lg:flex-row">
                     <div class="flex flex-col lg:w-5/12 mb-3">
-                        <textarea name="bride_info" id="bride-info" cols="10" rows="3">putri ke ... dari bapak ... dan ibu ...</textarea>
+                        <textarea name="bride_info" id="bride-info" cols="10" rows="3">{{ old('bride_info', 'putri ke ... dari bapak ... dan ibu ...') }}</textarea>
                         <x-validation-message name="bride_info"/>
                     </div>
                     <div class="flex flex-col lg:w-5/12">
-                        <textarea name="groom_info" id="groom-info" cols="10" rows="3">putra ke ... dari bapak ... dan ibu ...</textarea>
+                        <textarea name="groom_info" id="groom-info" cols="10" rows="3">{{ old('groom_info', 'putra ke ... dari bapak ... dan ibu ...') }}</textarea>
                         <x-validation-message name="groom_info"/>
                     </div>
                 </div>
@@ -77,18 +77,18 @@
                     <div class="flex flex-col justify-between items-center mb-3">
                         <div class="lg:w-5/12">
                             <p class="text-center">tanggal</p>
-                            <input type="date" name="wedding_date">
+                            <input type="date" name="wedding_date" value="{{ old('wedding_date') }}">
                             <x-validation-message name="wedding_date"/>
                         </div>
                         <div class="flex justify-between lg:w-5/12">
                             <div>
                                 <p class="text-center">dimulai</p>
-                                <input type="time" name="wedding_time_start">
+                                <input type="time" name="wedding_time_start" value="{{ old('wedding_time_start') }}">
                                 <x-validation-message name="wedding_time_start"/>
                             </div>
                             <div>
                                 <p class="text-center">sampai</p>
-                                <input type="time" name="wedding_time_end">
+                                <input type="time" name="wedding_time_end" value="{{ old('wedding_time_end') }}">
                                 <x-validation-message name="wedding_time_end"/>
                             </div>
                         </div>
@@ -99,18 +99,18 @@
                     <div class="flex flex-col justify-between items-center mb-3">
                         <div class="lg:w-5/12">
                             <p class="text-center">tanggal</p>
-                            <input type="date" name="reception_date">
+                            <input type="date" name="reception_date" value="{{ old('reception_date') }}">
                             <x-validation-message name="reception_date"/>
                         </div>
                         <div class="flex justify-between lg:w-5/12">
                             <div>
                                 <p class="text-center">dimulai</p>
-                                <input type="time" name="reception_time_start">
+                                <input type="time" name="reception_time_start" value="{{ old('reception_time_start') }}">
                                 <x-validation-message name="reception_time_start"/>
                             </div>
                             <div>
                                 <p class="text-center">sampai</p>
-                                <input type="time" name="reception_time_end">
+                                <input type="time" name="reception_time_end" value="{{ old('reception_time_end') }}">
                                 <x-validation-message name="reception_time_end"/>
                             </div>
                         </div>
@@ -121,24 +121,24 @@
                 <div>
                     <div>
                         <p class="md:text-lg lg:text-2xl">Alamat Akad Nikah</p>
-                        <input type="text" name="wedding_address" placeholder="Jl. Jenderal Soedirman">
+                        <input type="text" name="wedding_address" placeholder="Jl. Jenderal Soedirman" value="{{ old('wedding_address') }}">
                         <x-validation-message name="wedding_address"/>
                     </div>
                     <div>
                         <p class="md:text-lg lg:text-2xl">Alamat Acara Resepsi</p>
-                        <input type="text" name="reception_address" placeholder="Jl. Jenderal Soedirman">
+                        <input type="text" name="reception_address" placeholder="Jl. Jenderal Soedirman" value="{{ old('reception_address') }}">
                         <x-validation-message name="reception_address"/>
                     </div>
                 </div>
                 <div>
                     <div>
                         <p class="md:text-lg lg:text-2xl">Tempat Akad Nikah</p>
-                        <input type="text" name="wedding_venue" placeholder="Gelora Bung Karno">
+                        <input type="text" name="wedding_venue" placeholder="Gelora Bung Karno" value="{{ old('wedding_venue') }}">
                         <x-validation-message name="wedding_venue"/>
                     </div>
                     <div>
                         <p class="md:text-lg lg:text-2xl">Tempat Acara Resepsi</p>
-                        <input type="text" name="reception_venue" placeholder="Gelora Bung Karno">
+                        <input type="text" name="reception_venue" placeholder="Gelora Bung Karno" value="{{ old('reception_venue') }}">
                         <x-validation-message name="reception_venue"/>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
             <div class="flex flex-col items-center justify-evenly md:flex-row">
                 <div class="mb-3">
                     <p class="md:text-lg lg:text-2xl">Embed maps</p>
-                    <textarea name="embed_maps" id="embed-maps" cols="30" rows="3"></textarea>
+                    <textarea name="embed_maps" id="embed-maps" cols="30" rows="3">{{ old('embed_maps') }}</textarea>
                     <x-validation-message name="embed_maps"/>
                 </div>
                 <div class="flex flex-col items-center">
