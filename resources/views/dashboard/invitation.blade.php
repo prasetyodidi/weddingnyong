@@ -26,13 +26,16 @@
                             <td>{{ $invitations[$i]->price->name }}</td>
                             <td>{{ $invitations[$i]['active'] ? 'active' : 'non-active' }}</td>
                             <td class="relative group">
-                                <img class="mx-auto w-5 h-5" src="/img/invitation/qr-invitation/77QR.webp" alt="invitation QR">
+                                <img class="mx-auto w-5 h-5" src="/img/invitation/qr-invitation/test-qr.webp" alt="invitation QR">
                                 <div class="hidden absolute -top-16 -left-16 w-48 h-48 border-2 z-20 bg-primary duration-300 ease-out group-hover:ease-in group-hover:flex rounded-md bg-opacity-40 backdrop-filter backdrop-blur-lg justify-center items-center">
-                                    <img class="mx-auto w-28 h-28" src="/img/invitation/qr-invitation/test-qr.webp" alt="invitation QR">
+                                    <img class="mx-auto w-28 h-28" src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data={{ route('invitation.show', $invitations[$i]) }}" alt="invitation QR">
                                 </div>
                             </td>
-                            <td class="">
+                            <td class="relative group">
                                 <img class="w-5 h-5 mx-auto" src="/img/invitation/qr-invitation/test-qr.webp" alt="Attendee List QR">
+                                <div class="hidden absolute -top-16 -left-16 w-48 h-48 border-2 z-20 bg-primary duration-300 ease-out group-hover:ease-in group-hover:flex rounded-md bg-opacity-40 backdrop-filter backdrop-blur-lg justify-center items-center">
+                                    <img class="mx-auto w-28 h-28" src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data={{ route('attendee-list.create', ['nikahan' => base64_encode( $invitations[$i]['slug'] ) ]) }}" alt="invitation QR">
+                                </div>
                             </td>
                             <td class="flex items-center h-12 justify-evenly">
                                 <a href="{{ route('invitation.show', $invitations[$i]->slug) }}">

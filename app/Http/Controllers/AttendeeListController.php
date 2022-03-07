@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attendee_list;
 use App\Http\Requests\StoreAttendee_listRequest;
 use App\Http\Requests\UpdateAttendee_listRequest;
+use App\Models\Invitation;
+use Illuminate\Http\Request;
 
 class AttendeeListController extends Controller
 {
@@ -15,7 +17,7 @@ class AttendeeListController extends Controller
      */
     public function index()
     {
-        //
+        return view('attendee-list.index');
     }
 
     /**
@@ -25,7 +27,7 @@ class AttendeeListController extends Controller
      */
     public function create()
     {
-        //
+        return view('attendee-list.create');
     }
 
     /**
@@ -34,9 +36,27 @@ class AttendeeListController extends Controller
      * @param  \App\Http\Requests\StoreAttendee_listRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreAttendee_listRequest $request)
+    public function store(Request $request)
     {
-        //
+        $rules = [
+            'invitation_slug' => 'required|max:255',
+            'name' => 'required|max:255',
+            'address' => 'required|max:255',
+        ];
+        $invitationSlug = base64_decode($request->invitation_slug);
+        $request->validate($rules);
+        $invitationId = Invitation::getInvitationIdBySlug($invitationSlug);
+        $data = [
+            'invitation_id' => $invitationId,
+            'name' => $request->name,
+            'address' => $request->address,
+        ];
+        if ($invitationId != -1) {
+            Attendee_list::create($data);
+            return redirect(route('attendee-list.index'))->with('message', 'your data has been sending!');
+        }
+
+        return redirect(route('attendee-list.index'))->with('message', 'your data not valid!');
     }
 
     /**

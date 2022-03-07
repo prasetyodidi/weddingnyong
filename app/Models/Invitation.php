@@ -60,4 +60,14 @@ class Invitation extends Model
     {
         return Invitation::where('id', $invitationId)->get()->first()['user_id'];
     }
+
+    public static function getInvitationIdBySlug($invitation_slug)
+    {
+        $result = Invitation::where('slug', $invitation_slug)->get()->first();
+        if (isset($result)) {
+            return $result['id'];
+        } else {
+            return -1;
+        }
+    }
 }

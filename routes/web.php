@@ -50,7 +50,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::resource('/invitation', InvitationController::class)->parameters([
     'invitation' => 'invitation:slug'
 ]);
-Route::post('/guest-book/create', [GuestBookController::class, 'store'])->name('guest-book.post');
+Route::post('/guest-book/create', [GuestBookController::class, 'store'])->name('guest-book.store');
 Route::post('/guest-book/index', [GuestBookController::class, 'index'])->name('guest-book.index');
+Route::get('/attendee-list/index', [AttendeeListController::class, 'index'])->name('attendee-list.index');
+Route::get('/attendee-list/create', [AttendeeListController::class, 'create'])->name('attendee-list.create');
+Route::post('/attendee-list/create', [AttendeeListController::class, 'store'])->name('attendee-list.store');
 
 require __DIR__ . '/auth.php';

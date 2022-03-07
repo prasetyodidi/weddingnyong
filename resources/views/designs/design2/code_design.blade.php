@@ -104,7 +104,7 @@
 
                 {{-- form --}}
                 <div class="md:w-5/12 flex flex-col items-center">
-                    <form action="{{ route('guest-book.post') }}" method="POST">
+                    <form action="{{ route('guest-book.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
                         <div>

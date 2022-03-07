@@ -17,9 +17,9 @@ class AttendeeListSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             Attendee_list::create([
-                'invitation_id' => mt_rand(1, 5),
+                'invitation_id' => mt_rand(1, 20),
                 'name' => $faker->name(),
                 'address' => $faker->address(),
             ]);

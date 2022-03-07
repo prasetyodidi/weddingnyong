@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="md:w-5/12 w-full text-center">
-                    <form action="{{ route('guest-book.post') }}" method="POST">
+                    <form action="{{ route('guest-book.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
                         <div class="mb-7">
@@ -200,7 +200,9 @@
     </div>
 
     <script>
-        var countDownDate = new Date("Feb 27, 2022 15:37:25").getTime();
+        let weddingDate = '<?= $invitation->wedding_date ?>'
+        let weddingTime = '<?= $invitation->wedding_time_start ?>'
+        var countDownDate = new Date(weddingDate + 'T' + weddingTime + 'Z').getTime();
         
         // Update the count down every 1 second
         var x = setInterval(function() {
@@ -224,8 +226,11 @@
             
           // If the count down is over, write some text 
           if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "EXPIRED";
+            // clearInterval(x);
+            document.getElementById("days").innerHTML = '000';
+            document.getElementById("hours").innerHTML = '00';
+            document.getElementById("minutes").innerHTML = '00';
+            document.getElementById("seconds").innerHTML = '00';
           }
         }, 1000);
 

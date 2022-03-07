@@ -62,23 +62,28 @@ class GuestBookController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect(route('invitation.show', $invitation))
-                ->withErrors($validator)
-                ->withInput();
+            return [
+                'status' => 302
+            ];
         }
+
+        // if ($validator->fails()) {
+        //     return redirect(route('invitation.show', $invitation))
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
 
         $data = $validator->validated();
 
 
-        $data = [
-            'invitation_id' => $request->invitation_id,
-            'name' => $request->name,
-            'message' => $request->message,
-            'confirmation' => $request->confirmation
-        ];
+        // $data = [
+        //     'invitation_id' => $request->invitation_id,
+        //     'name' => $request->name,
+        //     'message' => $request->message,
+        //     'confirmation' => $request->confirmation
+        // ];
 
         Guest_book::create($data);
-
 
         // check user allow to get rsva email
         $invitationOwner = User::getUserByInvitationId($data['invitation_id']);
