@@ -6777,6 +6777,15 @@ select {
 .left-3 {
   left: 0.75rem;
 }
+.-left-7 {
+  left: -1.75rem;
+}
+.-left-14 {
+  left: -3.5rem;
+}
+.-left-20 {
+  left: -5rem;
+}
 .z-0 {
   z-index: 0;
 }
@@ -7652,6 +7661,14 @@ select {
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+}
+.px-14 {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 .pb-20 {
   padding-bottom: 5rem;

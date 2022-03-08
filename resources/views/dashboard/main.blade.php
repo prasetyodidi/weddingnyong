@@ -10,20 +10,35 @@
 <body>
     <div class="bg-gray-primary overflow-hidden h-screen box-border">
         {{-- header --}}
-        <div class="w-full h-14 bg-white flex justify-around items-center">
-            <h1 class="text-xl">Weddingnyong</h1>
+        <div class="w-full h-14 bg-white flex justify-between px-16 items-center">
+            <a href="/" class="text-xl">Weddingnyong</a>
             {{-- nav link --}}
-            <div class="flex relative group w-1/2 justify-end items-center hover:cursor-pointer ">
+            <div class="flex justify-end items-center">
                 <i class="fas fa-bell text-gray-primary text-xl"></i>
-                <img class="inline object-cover w-10 h-10 rounded-full" src="/{{ auth()->user()->profile_image }}" alt="Profile image"/>
-                <p>Hello, {{ auth()->user()->name }}</p>
-                <div class="absolute z-20 hidden text-center top-0 px-7 py-2 bg-white rounded-md border-2 shadow-md w-0 group-hover:w-auto group-hover:block group-hover:ease-in duration-700 ">
-                    <img class="rounded-full w-11 h-11 mx-auto border-2" src="/{{ auth()->user()->profile_image }}" alt="profile">
-                    <h2>{{ auth()->user()->name }}</h2>
-                    <p class="text-sm text-gray-600">{{ auth()->user()->email }}</p>
-                    <p class="text-sm">{{ auth()->user()->address ? auth()->user()->address : 'Anda belum menambahkan alamat' }}</p>
-                    <a href="{{ route('dashboard.profile') }}" class="block w-auto rounded-lg hover:shadow-md border-2 px-2 mt-7">kelola Akun Anda</a>
+                <div class="hover:cursor-pointer relative group">
+                    <img class="inline object-cover w-10 h-10 rounded-full" src="/{{ auth()->user()->profile_image }}" alt="Profile image"/>
+                    <div class="absolute z-20 hidden text-center top-0 -left-20 px-7 py-2 bg-white rounded-md border-2 shadow-md w-0 group-hover:w-auto group-hover:block group-hover:ease-in duration-700 ">
+                        <img class="rounded-full w-11 h-11 mx-auto border-2" src="/{{ auth()->user()->profile_image }}" alt="profile">
+                        <h2>{{ auth()->user()->name }}</h2>
+                        <p class="text-sm text-gray-600">{{ auth()->user()->email }}</p>
+                        <p class="text-sm">{{ auth()->user()->address ? auth()->user()->address : 'Anda belum menambahkan alamat' }}</p>
+                        <a href="{{ route('dashboard.profile') }}" class="block w-auto rounded-lg hover:shadow-md border-2 px-2 mt-7">kelola Akun Anda</a>
+                    </div>
                 </div>
+                <p>Hello, {{ auth()->user()->name }}</p>
+
+                {{-- <div class="flex group flex-row items-center justify-between">
+                    
+                    <img class="inline object-cover w-10 h-10 rounded-full" src="/{{ auth()->user()->profile_image }}" alt="Profile image"/>
+                    <p>Hello, {{ auth()->user()->name }}</p>
+                    <div class="absolute z-20 hidden text-center top-0 px-7 py-2 bg-white rounded-md border-2 shadow-md w-0 group-hover:w-auto group-hover:block group-hover:ease-in duration-700 ">
+                        <img class="rounded-full w-11 h-11 mx-auto border-2" src="/{{ auth()->user()->profile_image }}" alt="profile">
+                        <h2>{{ auth()->user()->name }}</h2>
+                        <p class="text-sm text-gray-600">{{ auth()->user()->email }}</p>
+                        <p class="text-sm">{{ auth()->user()->address ? auth()->user()->address : 'Anda belum menambahkan alamat' }}</p>
+                        <a href="{{ route('dashboard.profile') }}" class="block w-auto rounded-lg hover:shadow-md border-2 px-2 mt-7">kelola Akun Anda</a>
+                    </div> --}}
+                {{-- </div> --}}
             </div>
         </div>
 
