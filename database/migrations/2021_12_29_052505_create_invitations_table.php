@@ -42,6 +42,7 @@ class CreateInvitationsTable extends Migration
             $table->text('embed_maps');
             $table->string('audio');
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 

@@ -19,6 +19,7 @@ class CreateDesignsTable extends Migration
             $table->string('thumb');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 

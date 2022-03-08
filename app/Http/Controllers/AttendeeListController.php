@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Attendee_list;
 use App\Http\Requests\StoreAttendee_listRequest;
 use App\Http\Requests\UpdateAttendee_listRequest;
@@ -99,8 +100,10 @@ class AttendeeListController extends Controller
      * @param  \App\Models\Attendee_list  $attendee_list
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attendee_list $attendee_list)
+    public function destroy(Attendee_list $attendeeList)
     {
-        //
+        Helper::checkOwnerOrAdminAttendeeList($attendeeList);
+        $attendeeList->delete();
+        return redirect()->back()->with('message', 'data has been deleted');
     }
 }

@@ -19,6 +19,7 @@ class CreateAttendeeListsTable extends Migration
             $table->string('name');
             $table->text('address');
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 

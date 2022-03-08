@@ -5,8 +5,6 @@ use Zxing\QrReader;
 use App\Models\Design;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QrController;
-use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DesignController;
 use App\Http\Controllers\GuestBookController;
@@ -50,8 +48,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::resource('/invitation', InvitationController::class)->parameters([
     'invitation' => 'invitation:slug'
 ]);
-Route::post('/guest-book/create', [GuestBookController::class, 'store'])->name('guest-book.store');
-Route::post('/guest-book/index', [GuestBookController::class, 'index'])->name('guest-book.index');
+Route::resource('/guest-book', GuestBookController::class);
+Route::resource('/attendee-list', AttendeeListController::class);
 Route::get('/attendee-list/index', [AttendeeListController::class, 'index'])->name('attendee-list.index');
 Route::get('/attendee-list/create', [AttendeeListController::class, 'create'])->name('attendee-list.create');
 Route::post('/attendee-list/create', [AttendeeListController::class, 'store'])->name('attendee-list.store');

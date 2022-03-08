@@ -67,9 +67,13 @@
                             <a href="#" class="hover:cursor-pointer">
                                 <i class="fas fa-edit text-yellow-500"></i>
                             </a>
-                            <a href="#" class="hover:cursor-pointer">
-                                <i class="fas fa-times text-red-500"></i>
-                            </a>
+                            <form action="{{ route('guest-book.destroy', $guestBooks[$j]) }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" onclick="return confirm('are you sure?')">
+                                    <i class="fas fa-times text-red-500"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endfor 

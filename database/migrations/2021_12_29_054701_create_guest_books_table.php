@@ -20,6 +20,7 @@ class CreateGuestBooksTable extends Migration
             $table->text('message');
             $table->boolean('confirmation');
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 

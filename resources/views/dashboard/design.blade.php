@@ -2,9 +2,14 @@
 
 @section('content')
     <div class="w-full h-full p-3 overflow-hidden">
-        <h1 class="text-2xl">Invitations</h1>
-        <div class="w-3/4">
-            <table class="table-auto w-full mt-9">
+        <h1 class="text-2xl">Designs</h1>
+        <div class="w-3/4 mt-9">
+            <div class="flex flex-row-reverse w h-full">
+                <div>
+                    <a href="{{ route('design.create') }}" class="block text-white py-2 px-3 rounded-md bg-blue-400">New Design</a>
+                </div>
+            </div>
+            <table class="table-auto w-full">
                 <thead>
                     <tr class="bg-primary h-12 text-white">
                         <th class="border-2 w-9">No</th>
@@ -26,13 +31,19 @@
                                 <img class="h-10" src="/{{ $designs[$i]['thumb'] }}" alt="{{ $designs[$i]['name'] }}">
                             </td>
                             <td class="flex items-center h-12 justify-evenly">
-                                <a href="{{ route('invitation.show', $designs[$i]->slug) }}"><i class="fas fa-eye text-blue-500"></i></a>
-                                <a href="{{ route('invitation.edit', ['invitation' => $designs[$i]]) }}">
+                                <a href="{{ route('design.show', $designs[$i]->slug) }}">
+                                    <i class="fas fa-eye text-blue-500"></i>
+                                </a>
+                                <a href="{{ route('design.edit', $designs[$i]->slug) }}">
                                     <i class="fas fa-edit text-yellow-500"></i>
                                 </a>
-                                <a href="#">
-                                    <i class="fas fa-times text-red-500"></i>
-                                </a>
+                                <form action="{{ route('design.destroy', $designs[$i]) }}" method="POST">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" onclick="return confirm('are you sure?')">
+                                        <i class="fas fa-times text-red-500"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endfor 

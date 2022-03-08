@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Guest_book;
 use App\Models\Invitation;
 use App\Http\Requests\UpdateGuest_bookRequest;
@@ -136,6 +137,8 @@ class GuestBookController extends Controller
      */
     public function destroy(Guest_book $guest_book)
     {
-        //
+        Helper::checkOwnerOrAdminGuestBook($guest_book);
+        $guest_book->delete();
+        return redirect()->back()->with('message', 'Data has been deleted');
     }
 }

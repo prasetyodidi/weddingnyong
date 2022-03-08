@@ -13,7 +13,7 @@
                                 {{ $item->slug }}
                             </h1>
                             <p class="h-1/3 text-center">
-                                {{ count($item->guestBooks) }}
+                                {{ count($item->attendeeLists) }}
                                 <form action="{{ route('dashboard.attendee_list') }}" method="GET" class="absolute hidden left-0 top-0 right-0 bottom-0 group-hover:flex justify-center bg-gray-400/50">
                                     <input type="hidden" name="invitation_slug" value="{{ $item->slug }}">
                                     <button type="submit" class="hover:cursor-pointer">
@@ -28,8 +28,8 @@
                                 {{ $item->slug }}
                             </h1>
                             <p class="h-1/3 text-center">
-                                {{ count($item->guestBooks) }}
-                                <form action="{{ route('dashboard.guest_book') }}" method="GET" class="absolute hidden left-0 top-0 right-0 bottom-0 group-hover:flex justify-center bg-primary/50">
+                                {{ count($item->attendeeLists) }}
+                                <form action="{{ route('dashboard.attendee_list') }}" method="GET" class="absolute hidden left-0 top-0 right-0 bottom-0 group-hover:flex justify-center bg-primary/50">
                                     <input type="hidden" name="invitation_slug" value="{{ $item->slug }}">
                                     <button type="submit" class="hover:cursor-pointer">
                                         <i class="fas fa-chevron-right"></i>
@@ -70,9 +70,13 @@
                                 <a href="#" class="hover:cursor-pointer">
                                     <i class="fas fa-edit text-yellow-500"></i>
                                 </a>
-                                <a href="#" class="hover:cursor-pointer">
-                                    <i class="fas fa-times text-red-500"></i>
-                                </a>
+                                <form action="{{ route('attendee-list.destroy', $attendeeLists[$j]) }}" method="POST">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" onclick="return confirm('are you sure?')">
+                                        <i class="fas fa-times text-red-500"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endfor 

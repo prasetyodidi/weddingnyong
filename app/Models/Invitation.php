@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Invitation extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SoftDeletes;
 
     protected $guarded = ['id'];
 
@@ -61,13 +62,18 @@ class Invitation extends Model
         return Invitation::where('id', $invitationId)->get()->first()['user_id'];
     }
 
-    public static function getInvitationIdBySlug($invitation_slug)
+    public static function getInvitationIdBySlug($invitationSlug)
     {
-        $result = Invitation::where('slug', $invitation_slug)->get()->first();
+        $result = Invitation::where('slug', $invitationSlug)->get()->first();
         if (isset($result)) {
             return $result['id'];
         } else {
             return -1;
         }
+    }
+
+    public static function getInvitationById($invitationId)
+    {
+        return Invitation::where('id', $invitationId)->get()->first();
     }
 }

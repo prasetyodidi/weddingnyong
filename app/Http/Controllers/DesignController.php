@@ -8,6 +8,11 @@ use App\Http\Requests\UpdateDesignRequest;
 
 class DesignController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['admin'])->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +31,7 @@ class DesignController extends Controller
      */
     public function create()
     {
-        //
+        return 'create new design';
     }
 
     /**
@@ -48,7 +53,7 @@ class DesignController extends Controller
      */
     public function show(Design $design)
     {
-        //
+        return view('designs/' . $design->slug . '/demo_design');
     }
 
     /**
@@ -59,7 +64,7 @@ class DesignController extends Controller
      */
     public function edit(Design $design)
     {
-        //
+        return 'edit design';
     }
 
     /**
@@ -82,6 +87,5 @@ class DesignController extends Controller
      */
     public function destroy(Design $design)
     {
-        //
     }
 }

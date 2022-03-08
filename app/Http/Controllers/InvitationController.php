@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Invitation;
 use App\Models\Design;
 use App\Http\Requests\UpdateInvitationRequest;
@@ -151,6 +152,7 @@ class InvitationController extends Controller
     // only invitee owner & admin
     public function update(HttpRequest $request, Invitation $invitation)
     {
+        $this->checkOwnerOrAdmin($invitation);
         $rules = [
             'cover_image' => 'image|file|max:2048',
             'groom_image' => 'image|file|max:2048',
@@ -202,9 +204,9 @@ class InvitationController extends Controller
     // only invitee owner & admin
     public function destroy(Invitation $invitation)
     {
-        return 'remove data from database';
+        Helper::checkOwnerOrAdminInvitation($invitation);
         $invitation->delete();
-        return route('dashboard.invitation');
+        return redirect()->back()->with('message', 'data has been deleted');
     }
 
     public function checkSlug($names)
@@ -212,12 +214,5 @@ class InvitationController extends Controller
         $name = $names['groom_name'] . '-' . $names['bride_name'];
         $slug = SlugService::createSlug(Invitation::class, 'slug', $name);
         return $slug;
-    }
-
-    private function checkOwnerOrAdmin(Invitation $invitation)
-    {
-        if (auth()->user()->id != $invitation['user_id'] || !auth()->user()->role_id > 0) {
-            abort(403, 'This access is blocked');
-        }
     }
 }

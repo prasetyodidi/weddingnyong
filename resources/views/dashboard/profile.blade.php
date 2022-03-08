@@ -1,6 +1,17 @@
 @extends('dashboard.main')
 
 @section('content')
+<style>
+    .toggle-checkbox:checked {
+    @apply: right-0 border-green-400;
+    right: 0;
+    border-color: #68D391;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+    @apply: bg-green-400;
+    background-color: #68D391;
+    }
+    </style>
     <div class="w-full h-full p-3 overflow-hidden">
         <h1 class="text-2xl">Profile</h1>
 
@@ -32,15 +43,18 @@
                         <tr>
                             <td>Kirim konfirmasi RSVP ke email? </td>
                             <td>
-                                <div class="flex justify-start">
-                                    <div class="form-check form-switch">
-                                        @if ($user->rsvp_email)
-                                            <input name="rsvp_email" class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
-                                        @else
-                                            <input name="rsvp_email" class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                        @endif
+                                @if ($user->rsvp_email)
+                                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                                     </div>
+                                @else
+                                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                        <input name="rsvp_email" checked type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                        <label name="rsvp_email" for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
                                     </div>
+                                @endif
+                                {{-- <label for="toggle" class="text-xs text-gray-700">Toggle me.</label> --}}
                             </td>
                         </tr>
                     </tbody>
