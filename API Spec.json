@@ -1,0 +1,301 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+        "title":"Weddingnyong",
+        "description": "API Spec for Weddingnyong",
+        "version":"1.0",
+        "contact": {
+            "name": "Didi Prasetyo",
+            "email": "didiprasetyo360@gmail.com",
+            "url": "https://prasetyodidi.github.io/"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers": [
+        {
+            "url":"https://api.server.test/v1"
+        }
+    ],
+    "components": {
+        "parameters": {
+            "invitationId": {
+                "name": "invitationId",
+                "in": "path",
+                "required": true,
+                "description": "invitation id",
+                "schema": {
+                    "type": "string",
+                    "example": "randomstring"
+                }
+            }
+        },
+        "securitySchemes": {
+            "JWTBearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            },
+            "TokenResetPassword": {
+                "type": "apiKey",
+                "name": "api_key",
+                "in": "header"
+            }
+        }
+    },
+    "paths": {
+        "/invitation": {
+            "get": {
+                "tags": ["Invitation"],
+                "description": "",
+                "parameters": [],
+                "summary": "get all invitation",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Invitation"],
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/invitation/{invitationId}":{
+            "get": {
+                "tags": ["Invitation"],
+                "description": "show invitation",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/invitationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Invitation"],
+                "description": "update invitation",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/invitationId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": ["Invitation"],
+                "description": "Delete invitation",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": ["Auth"],
+                "description": "login user",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "minLength": 6
+                                    }
+                                },
+                                "required": ["id"]
+                            },
+                            "examples": {
+                                "validData": {
+                                    "description": "user data is valid",
+                                    "value": {
+                                        "id": "0f24a1c2-4197-4d6a-b109-df4fc4c7d75c",
+                                        "email": "didiprasetyo360@gmail.com",
+                                        "password": "password"
+                                    }
+                                },
+                                "passwordTooShort": {
+                                    "description": "user password is too short",
+                                    "value": {
+                                        "id": "8bdf16eb-aa2a-4a06-96e6-fb05a8ebf9b4",
+                                        "email": "adrianji1945@gmail.com",
+                                        "password": "pass"
+                                    }
+                                },
+                                "emailOrIdAlReadyExist": {
+                                    "description": "user email is already exist",
+                                    "value": {
+                                        "id": "0f24a1c2-4197-4d6a-b109-df4fc4c7d75c",
+                                        "email": "didiprasetyo360@gmail.com",
+                                        "password": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": ["Auth"],
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": ["Auth"],
+                "description": "user logout",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "JWTBearer": []
+                    }
+                ]
+            }
+        },
+        "/reset-password": {
+            "post": {
+                "tags": ["Auth"],
+                "description": "user request reset password",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/verify-email/{id}/{hash}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "user id",
+                    "schema": {
+                        "type": "string",
+                        "example": "randomstring"
+                    }
+                },
+                {
+                    "name": "hash",
+                    "in": "path",
+                    "required": true,
+                    "description": "hashing data",
+                    "schema": {
+                        "type": "string",
+                        "example": "randomstring"
+                    }
+                }
+            ],
+            "get": {
+                "tags": ["Auth"],
+                "description": "user verify email",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/resend-email-verification": {
+            "post": {
+                "tags": ["Auth"],
+                "description": "user request email verification again",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/password": {
+            "put": {
+                "tags": ["Auth"],
+                "description": "user update password",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "TokenResetPassword": []
+                    }
+                ]
+            }
+        }
+    }
+}
