@@ -52,20 +52,6 @@
                 "description": "",
                 "parameters": [],
                 "summary": "get all invitation",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -84,14 +70,14 @@
             }
         },
         "/invitation/{invitationId}":{
+            "parameters": [
+                {
+                    "$ref": "#/components/parameters/invitationId"
+                }
+            ],
             "get": {
                 "tags": ["Invitation"],
                 "description": "show invitation",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/invitationId"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -101,11 +87,6 @@
             "put": {
                 "tags": ["Invitation"],
                 "description": "update invitation",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/invitationId"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK"
